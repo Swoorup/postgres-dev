@@ -2,8 +2,7 @@ FROM postgres:12
 
 MAINTAINER Swoorup Joshi <swoorup.joshi at domain.com.au>
 
-ENV PLV8_VERSION=2.3.13 \
-    PLV8_SHASUM="1a96c559d98ad757e7494bf7301f0e6b0dd2eec6066ad76ed36cc13fec4f2390"
+ENV PLV8_VERSION=2.3.14
 ENV POSTGIS_MAJOR 3
 ENV POSTGIS_VERSION 3.0.3+dfsg-2.pgdg100+1
 
@@ -38,7 +37,6 @@ RUN buildDependencies="build-essential \
   && mkdir -p /tmp/build \
   && curl -o /tmp/build/v$PLV8_VERSION.tar.gz -SL "https://github.com/plv8/plv8/archive/v${PLV8_VERSION}.tar.gz" \
   && cd /tmp/build \
-  && echo $PLV8_SHASUM v$PLV8_VERSION.tar.gz | sha256sum -c \
   && tar -xzf /tmp/build/v$PLV8_VERSION.tar.gz -C /tmp/build/ \
   && cd /tmp/build/plv8-$PLV8_VERSION \
   && make static \
