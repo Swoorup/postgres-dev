@@ -5,10 +5,18 @@ MAINTAINER Swoorup Joshi <swoorup.joshi at domain.com.au>
 ENV PLV8_VERSION=2.3.13 \
     PLV8_SHASUM="1a96c559d98ad757e7494bf7301f0e6b0dd2eec6066ad76ed36cc13fec4f2390"
 ENV POSTGIS_MAJOR 3
-ENV POSTGIS_VERSION 3.0.0+dfsg-2~exp1.pgdg100+1
+ENV POSTGIS_VERSION 3.0.3+dfsg-2.pgdg100+1
 
 RUN apt-get update && apt-get install -y postgresql-contrib
 
+# Install postgis
+RUN apt-cache showpkg postgresql-$PG_MAJOR-postgis-$POSTGIS_MAJOR \
+    && apt-get install -y --no-install-recommends \
+         postgresql-$PG_MAJOR-postgis-$POSTGIS_MAJOR=$POSTGIS_VERSION \
+         postgresql-$PG_MAJOR-postgis-$POSTGIS_MAJOR-scripts=$POSTGIS_VERSION \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install plv8
 RUN buildDependencies="build-essential \
     ca-certificates \
     curl \
@@ -42,9 +50,3 @@ RUN buildDependencies="build-essential \
   && apt-get autoremove -y \
   && rm -rf /tmp/build /var/lib/apt/lists/*
 
-# Install postgis
-RUN apt-cache showpkg postgresql-$PG_MAJOR-postgis-$POSTGIS_MAJOR \
-    && apt-get install -y --no-install-recommends \
-         postgresql-$PG_MAJOR-postgis-$POSTGIS_MAJOR=$POSTGIS_VERSION \
-         postgresql-$PG_MAJOR-postgis-$POSTGIS_MAJOR-scripts=$POSTGIS_VERSION \
-    && rm -rf /var/lib/apt/lists/*
