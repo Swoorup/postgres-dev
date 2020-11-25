@@ -6,7 +6,7 @@ ENV PLV8_VERSION=2.3.14
 ENV POSTGIS_MAJOR 3
 ENV POSTGIS_VERSION 3.0.3+dfsg-2.pgdg100+1
 
-RUN apt-get update && apt-get install -y postgresql-contrib
+RUN apt-get update && apt-get install -y postgresql-contrib-$PG_MAJOR
 
 # Install postgis
 RUN apt-cache showpkg postgresql-$PG_MAJOR-postgis-$POSTGIS_MAJOR \
