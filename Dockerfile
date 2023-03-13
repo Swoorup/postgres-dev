@@ -1,6 +1,6 @@
 FROM postgres:15-bullseye
 
-MAINTAINER Justin Tutty <justin.tutty at domain.com.au>
+LABEL authors="Swoorup Joshi,justin.tutty at domain.com.au"
 
 ENV POSTGIS_MAJOR 3
 ENV POSTGIS_VERSION 3.3.2+dfsg-1.pgdg110+1
